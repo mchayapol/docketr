@@ -1,0 +1,28 @@
+<div class="panel panel-default col-lg-7 hidden-print">
+    <!-- Default panel contents -->
+    <div class="panel-heading hidden-print"><li class="fa fa-list-ol"></li> ปรับราคาสินค้า</div>
+
+    <!-- Table -->
+    <table class="table">
+        <thead>
+            <tr><th>รายการ</th>
+             <th>ราคาขายต่อหน่วย</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="p in products" style="background-color: #bef8e2">
+                <td>{{ p.name }}</td>
+                <td>
+                    <input type="number" ng-model="p.price" style="width: 80px">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="button btn-success btn-lg" ng-click="save()">
+                <i class="glyphicon glyphicon-ok"></i> บันทึก
+    </button>
+    <button class="button btn-default btn-lg" ng-click="reset()">
+        <i class="glyphicon glyphicon-refresh"></i> เริ่มใหม่
+    </button>
+
+</div>`

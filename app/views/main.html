@@ -1,0 +1,170 @@
+
+
+<div class="panel panel-default col-lg-5 hidden-print">
+    <!-- Default panel contents -->
+    <div class="panel-heading hidden-print">
+        <li class="fa fa-user"></li> ลูกค้า
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <label>ค้นหา:</label>
+            <div class="btn-group" ng-show="search.option === 'name'">
+                <a ng-click="search.option='name'" class="btn btn-success">บริษัท</a>
+                <a ng-click="search.option='carPlateNo'" class="btn btn-default">ทะเบียนรถ</a>
+            </div>
+
+            <div class="input-group hidden-print" ng-show="search.option === 'name'">
+                <input ng-model="selectedCustomer"
+                       bs-typeahead
+                       bs-options="customer as customer.name for customer in customers"
+                       data-min-length="0" data-html="1" data-auto-select="true" data-animation="am-flip-x"
+                       type="text" class="form-control" placeholder="ชื่อบริษัท">
+                <span class="input-group-btn">
+                    <button class="btn btn-info" type="button" ng-click="clearSearch()">X</button>
+                </span>
+            </div>
+
+            <div class="btn-group" ng-show="search.option === 'carPlateNo'">
+                <a ng-click="search.option='name'" class="btn btn-default">บริษัท</a>
+                <a ng-click="search.option='carPlateNo'" class="btn btn-success">ทะเบียนรถ</a>
+            </div>
+            <div class="input-group hidden-print" ng-show="search.option === 'carPlateNo'">
+                <input ng-model="selectedCustomer"
+                       bs-typeahead
+                       bs-options="customer as customer.carPlateNo for customer in customers"
+                       data-min-length="0" data-html="1" data-auto-select="true" data-animation="am-flip-x"
+                       type="text" class="form-control" placeholder="ทะเบียนรถ ">
+                <span class="input-group-btn">
+                    <button class="btn btn-info" type="button" ng-click="clearSearch()">X</button>
+                </span>
+            </div>
+            <hr class="hidden-print">
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-briefcase"></i> </span>
+                <input ng-model="selectedCustomer.name" type="text" class="form-control" placeholder=" ชื่อบริษัท">
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">สาขา <span ng-hide="selectedCustomer.branch != 0">: สำนักงานใหญ่</span></span>
+                <input ng-model="selectedCustomer.branch" type="text" class="form-control" placeholder=" สาขา">
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1"><i class="fa fa-car"></i></span>
+                <input ng-model="selectedCustomer.carPlateNo" type="text" class="form-control" placeholder="ทะเบียนรถ ">
+            </div>
+            <textarea ng-model="selectedCustomer.address" class="form-control" placeholder="ที่อยู่"></textarea>
+            <div class="input-group hidden-print">
+                <span class="input-group-addon" id="basic-addon1"><i class="fa fa-hashtag"></i></span>
+                <input ng-model="selectedCustomer.taxNo" type="text" class="form-control" placeholder="เลขประจำตัวผู้เสียภาษี">
+            </div>
+        </div>
+    </div>
+    <button class="button btn-default hidden-print" ng-click="clearForm()">
+        <i class="glyphicon glyphicon-refresh"></i> เริ่มใหม่
+    </button>
+    <button ng-show="selectedCustomer.name" class="button btn-success" ng-click="saveCustomer()">
+        <i class="fa fa-save"></i> บันทึก
+    </button>
+    <button ng-show="selectedCustomer !== {} && selectedCustomer.taxNo" class="button btn-success" ng-click="addNewCustomer()">
+        <i class="fa fa-save"></i> บันทึกลูกค้าใหม่
+    </button>
+</div>
+
+
+
+<div class="panel panel-default col-lg-7 hidden-print">
+    <!-- Default panel contents -->
+    <div class="panel-heading hidden-print"><li class="fa fa-list-ol"></li> รายการสินค้า</div>
+
+    <!-- Table -->
+    <table class="table">
+        <thead>
+            <tr><th>รายการ</th> <th>@</th> <th>ลิตร</th> <th>ราคา</th></tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="p in products" style="background-color: #bef8e2">
+                <td>{{ p.name }}</td>
+                <td style="width: 60px">{{ p.price }}</td>
+                <td align="right" class="col-lg-2">{{ p.amount / p.price | number:3}}</td>
+                <td align="right">
+                    <input class="hidden-print" type="number" ng-model="p.amount" style="width: 80px">
+                </td>
+            </tr>
+            <tr>
+                <th colspan="3">มูลค่าสินค้า</th>
+                <td align="right">{{ totalAmount()/107*100 |number:2 }}</td>
+            </tr>
+            <tr>
+                <th colspan="3">ภาษีมูลค่าเพิ่ม 7%</th>
+                <td align="right">{{ totalAmount()/107*7 |number:2 }}</td>
+            </tr>
+            <tr>
+                <th colspan="3">รวม ({{ bahttext(totalAmount()) }})</th>
+                <td align="right">{{ totalAmount() |number:2 }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+    <button class="button btn-success btn-lg hidden-print" ng-click="saveAndPrint()">
+        <i class="glyphicon glyphicon-print"></i> พิมพ์
+    </button>
+</div>
+
+<!-- Printing Prep -->
+<div class="visible-print-inlineX" style=" font-size: 8pt;">
+    <div style="text-align: center;">
+        ใบเสร็จรับเงิน/ใบกำกับภาษี<br />
+        <!--(สำเนา)<br />-->
+        {{ company.name }}<br />
+        {{ company.address}}<br />
+        Tel: {{ company.tel }}<br />
+        เลขประจำตัวผู้เสียภาษี: {{ company.taxNo }}<br />
+    </div>
+    <p>
+        สาขาที่ออกใบกำกับภาษี: {{ company.branch | branchlabel }}<br />
+        เลขที่: {{ newId() }}<br />
+        วันที่: {{ date }}
+    </p>
+    <p>
+        {{selectedCustomer.name}}<br>
+        สาขา {{ selectedCustomer.branch | branchlabel}}<br>
+        {{selectedCustomer.address}}<br>
+        เลขประจำตัวผู้เสียภาษีผู้ซื้อ: {{selectedCustomer.taxNo}}<br />
+        ทะเบียนรถ {{selectedCustomer.carPlateNo || '-'}}
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <td>รายการ</td>
+                <td align="right">ราคา/หน่วย</td>
+                <td align="right">ปริมาณ</td>
+                <td align="right">จำนวนเงิน</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="p in products" ng-hide="!p.amount">
+                <td>{{ p.name }}</td>
+                <td align="right">{{ p.price }}</td>
+                <td align="right">{{ p.amount / p.price | number:3}}</td>
+                <td align="right">{{p.amount | number:2 }}</td>
+            </tr>
+            <tr>
+                <td align="right" colspan="3">มูลค่าสินค้า</td>
+                <td align="right">{{ totalAmount()/107*100 |number:2 }}</td>
+            </tr>
+            <tr>
+                <td align="right" colspan="3" style="border: none;">ภาษีมูลค่าเพิ่ม (VAT 7%)</td>
+                <td align="right" style="border: none;">{{ totalAmount()/107*7 |number:2 }}</td>
+            </tr>
+            <tr>
+                <td align="right" colspan="3" style="border: none;">รวม ({{ bahttext(totalAmount(),'บาทถ้วน') }})</td>
+                <td align="right" style="border: none;">{{ totalAmount() |number:2 }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+    ได้รับสินค้าตามรายการนี้ไว้ถูกต้อง<br />
+    และในสภาพเรียบร้อยทุกประการ<br />
+    <br />
+    ลงชื่อผู้รับเงิน ........................................................<br /><br />
+    <div style="text-align: center">*** ขอบคุณที่ใช้บริการ ***_</div>
+</div>

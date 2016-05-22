@@ -1,0 +1,85 @@
+<div class="panel panel-default col-lg-5 hidden-print">
+    <!-- Default panel contents -->
+    <div class="panel-heading hidden-print"><li class="fa fa-user"></li> ลูกค้า</div>
+    <div class="panel-body">
+        <div class="row">
+            <label>ค้นหา:</label>
+                <div class="btn-group" ng-show="search.option === 'name'">
+                    <a ng-click="search.option='name'" class="btn btn-success">บริษัท</a>
+                    <a ng-click="search.option='carPlateNo'" class="btn btn-default">ทะเบียนรถ</a>
+                </div>
+            <div class="input-group hidden-print" ng-show="search.option === 'name'">
+                <input ng-model="selectedCustomer"
+                       bs-typeahead
+                       bs-options="customer as customer.name for customer in customers"
+                       data-min-length="0" data-html="1" data-auto-select="true" data-animation="am-flip-x"
+                       type="text" class="form-control" placeholder="ชื่อบริษัท">
+                <span class="input-group-btn">
+                    <button class="btn btn-info" type="button" ng-click="clearSearch()">X</button>
+                </span>
+            </div>
+
+            <div class="btn-group" ng-show="search.option === 'carPlateNo'">
+                <a ng-click="search.option='name'" class="btn btn-default">บริษัท</a>
+                <a ng-click="search.option='carPlateNo'" class="btn btn-success">ทะเบียนรถ</a>
+            </div>
+            <div class="input-group hidden-print" ng-show="search.option === 'carPlateNo'">
+                <input ng-model="selectedCustomer"
+                       bs-typeahead
+                       bs-options="customer as customer.carPlateNo for customer in customers"
+                       data-min-length="0" data-html="1" data-auto-select="true" data-animation="am-flip-x"
+                       type="text" class="form-control" placeholder="ทะเบียนรถ ">
+                <span class="input-group-btn">
+                    <button class="btn btn-info" type="button" ng-click="clearSearch()">X</button>
+                </span>
+            </div>
+
+        </div>
+    </div>
+    <button class="button btn-success btn-lg hidden-print" ng-click="newCustomer()">
+        <i class="glyphicon glyphicon-plus"></i> เพิ่ม
+    </button>
+</div>
+
+
+
+<div class="panel panel-default col-lg-7 hidden-print">
+    <!-- Default panel contents -->
+    <div class="panel-heading hidden-print"><li class="fa fa-list-ol"></li> 
+        <span ng-hide="modeNewCustomer">รายละเอียด</span>
+        <span ng-show="modeNewCustomer">เพิ่มลูกค้าใหม่</span>
+    </div>
+
+
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-briefcase"></i> </span>
+        <input ng-model="selectedCustomer.name" type="text" class="form-control" placeholder=" ชื่อบริษัท">
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">สาขา <span ng-hide="selectedCustomer.branch != 0">: สำนักงานใหญ่</span></span>
+        <input ng-model="selectedCustomer.branch" type="text" class="form-control" placeholder=" สาขา">
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1"><i class="fa fa-car"></i></span>
+        <input ng-model="selectedCustomer.carPlateNo" type="text" class="form-control" placeholder="ทะเบียนรถ ">
+    </div>
+    <textarea ng-model="selectedCustomer.address" class="form-control" placeholder="ที่อยู่"></textarea>
+    <div class="input-group hidden-print">
+        <span class="input-group-addon" id="basic-addon1"><i class="fa fa-hashtag"></i></span>
+        <input ng-model="selectedCustomer.taxNo" type="text" class="form-control" placeholder="เลขประจำตัวผู้เสียภาษี">
+    </div>
+
+    <button ng-hide="modeNewCustomer || !selectedCustomer.name" class="button btn-success btn-lg" ng-click="saveCustomer()">
+        <i class="fa fa-save"></i> บันทึก
+    </button>
+    <button ng-show="modeNewCustomer" class="button btn-success btn-lg" ng-click="addNewCustomer()">
+        <i class="fa fa-save"></i> บันทึกลูกค้าใหม่
+    </button>
+
+    <button ng-hide="modeNewCustomer || !selectedCustomer.name" class="button btn-default btn-lg" ng-click="deleteCustomer()">
+        <i class="glyphicon glyphicon-trash"></i> ลบ
+    </button>
+    <button ng-show="modeNewCustomer" class="button btn-default btn-lg" ng-click="cancelNewCustomer()">
+        <i class="fa fa-undo"></i> ยกเลิก
+    </button>
+</div>

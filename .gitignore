@@ -1,0 +1,10 @@
+/node_modules
+/dist
+/.tmp
+/.sass-cache
+/bower_components
+node_modules/
+bower_components/
+vendor/
+docketr/app/bower_components
+docketr/rest/public/docs/
