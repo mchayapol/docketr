@@ -59,17 +59,23 @@ angular.module('docketrApp')
 
         return branchlabelFilter;
     })
-.controller('MainCtrl', function ($scope, $window, $resource, $alert, Products, Customers) {
+.controller('MainCtrl', function ($scope, $window, $resource, $alert, Products, Customers, Dockets) {
     $scope.search = {
         option: 'name'
     };
 
     $scope.date = (new Date()).toLocaleString("en-Gb");
     $scope.company = $resource('company.json').get();
+    /*
     $scope.newId = function () {
         var date = new Date();
         return date.getFullYear() + ((date.getMonth() < 10 ? '0' : '') + (date.getMonth() + 1)) + ((date.getDate() < 10 ? '0' : '') + date.getDate()) + '-' + date.getHours() + date.getMinutes() + date.getSeconds();
     };
+    */
+    $scope.newId = Dockets.getNewId().then(function (res) {
+        $scope.newId = res.data;
+        console.log($scope.newId);
+    });
 
     // Load data
     $scope.products = Products.listAll();
@@ -162,9 +168,37 @@ angular.module('docketrApp')
                   show: true
               });
               return;
-          }
-          //console.log('Print:',$scope.selectedCustomer);
-          $window.print();
+        }
+
+        //console.log('Print:',$scope.selectedCustomer);
+        /*
+        var beforePrint = function () {
+            console.log('Functionality to run before printing.');
+        };
+        var afterPrint = function (mql) {
+            console.log('Functionality to run after printing');
+            console.log(mql);
+        };
+
+        if (window.matchMedia) {
+            var mediaQueryList = window.matchMedia('print');
+            mediaQueryList.addListener(function (mql) {
+                if (mql.matches) {
+                    beforePrint();
+                } else {
+                    afterPrint(mql);
+                }
+            });
+        }
+
+        window.onbeforeprint = beforePrint;
+        window.onafterprint = afterPrint;
+        */
+        $window.print();
+        $scope.newId = Dockets.getId().then(function (res) {
+            $scope.newId = res.data;
+            console.log($scope.newId);
+        });
       };
 
       $scope.clearForm = function () {
