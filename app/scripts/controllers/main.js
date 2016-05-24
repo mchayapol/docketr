@@ -64,11 +64,11 @@ angular.module('docketrApp')
         option: 'name'
     };
 
-    $scope.date = (new Date()).toLocaleString("en-us");
+    $scope.date = (new Date()).toLocaleString("en-Gb");
     $scope.company = $resource('company.json').get();
     $scope.newId = function () {
         var date = new Date();
-        return date.getFullYear() + ((date.getMonth() < 10 ? '0' : '') + (date.getMonth() + 1)) + ((date.getDate() < 10 ? '0' : '') + date.getDate()) + '-' + date.getTime();
+        return date.getFullYear() + ((date.getMonth() < 10 ? '0' : '') + (date.getMonth() + 1)) + ((date.getDate() < 10 ? '0' : '') + date.getDate()) + '-' + date.getHours() + date.getMinutes() + date.getSeconds();
     };
 
     // Load data
