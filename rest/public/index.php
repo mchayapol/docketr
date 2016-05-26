@@ -8,7 +8,6 @@ require_once 'db.php';
 use Luracast\Restler\Restler;
 use Luracast\Restler\Defaults;
 
-// Setup CORS https://github.com/Luracast/Restler/issues/254
 Defaults::$cacheDirectory = __DIR__.'/../cache';
 Defaults::$crossOriginResourceSharing = true;
 Defaults::$accessControlAllowOrigin = '*';

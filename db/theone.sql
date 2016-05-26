@@ -28,9 +28,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `docketr_customer` (
   `id` int(11) NOT NULL,
-  `name` varchar(45) DEFAULT NULL,
-  `company_name` varchar(45) DEFAULT NULL,
-  `address` varchar(45) DEFAULT NULL,
+  `name` varchar(200) DEFAULT NULL,
+  `company_name` varchar(200) DEFAULT NULL,
+  `address` varchar(400) DEFAULT NULL,
   `district_id` varchar(10) DEFAULT NULL,
   `amphoe_id` varchar(10) DEFAULT NULL,
   `province_id` varchar(10) DEFAULT NULL,
