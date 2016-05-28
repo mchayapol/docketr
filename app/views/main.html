@@ -128,7 +128,7 @@
     </p>
     <p>
         {{selectedCustomer.name}}<br>
-        สาขา {{ selectedCustomer.branch | branchlabel}}<br>
+        {{ selectedCustomer.branch | branchlabel}}<br>
         {{selectedCustomer.address}}<br>
         เลขประจำตัวผู้เสียภาษีผู้ซื้อ: {{selectedCustomer.taxNo}}<br />
         ทะเบียนรถ {{selectedCustomer.carPlateNo || '-'}}
