@@ -45,8 +45,8 @@ class Shifts {
 		$shift = ORM::forTable('docketr_shift')->create();
 		$lastDocketId = (new Dockets)->get();
 		$shift->start_docket_id = $lastDocketId;
-		// TODO send dt, now it is empty
 		if (true === $shift->save()) {
+			$shift = ORM::forTable('docketr_shift')->findOne($shift->id);
 			return $shift->asArray();
 		} else {
 			throw new RestException(501, 'MySQL: ' . $e->getMessage());
