@@ -10,4 +10,14 @@
           return $http.get('http://localhost/docketr_api/dockets');
       };        self.getNewId = function () {
           return $http.get('http://localhost/docketr_api/dockets/nextId');
-      };   }); 
+      };   })   .service('Shifts', function ($http) {
+      var self = this;       self.add = function (amount) {
+          return $http.get('http://localhost/docketr_api/shifts/add?amount='+amount);
+      };        self.get = function (id) {
+          return $http.get('http://localhost/docketr_api/shifts/' + id);
+      };        self.restart = function () {
+          return $http.get('http://localhost/docketr_api/shifts/new');
+      };        self.current = function () {
+          return $http.get('http://localhost/docketr_api/shifts/last');
+      };
+  }); 

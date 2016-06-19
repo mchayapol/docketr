@@ -18,4 +18,5 @@ $r->setOverridingFormats('HtmlFormat','UploadFormat','JsonFormat');
 $r->addAPIClass('Products');
 $r->addAPIClass('Customers');
 $r->addAPIClass('Dockets');
+$r->addAPIClass('Shifts');
 $r->handle();

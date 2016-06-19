@@ -1,12 +1,52 @@
 <div class="panel panel-default col-lg-7 hidden-print">
     <!-- Default panel contents -->
+    <div class="panel-heading hidden-print"><li class="fa fa-list-ol"></li> Shift {{ shift.id }}</div>
+    <table class="table">
+        <tr>
+            <th class="col-sm-2">Open Time</th>
+            <td>{{ shift.dt }}</td>
+            <th class="col-sm-2 warning">Last Open Time</th>
+            <td class="warning">{{ shift0.dt }}</td>
+        </tr>
+        <tr>
+            <th class="col-sm-2">#Dockets</th>
+            <td>{{ shift.count }}</td>
+            <th class="col-sm-2 warning">Dockets</th>
+            <td class="warning">{{ shift0.count }}</td>
+        </tr>
+        <tr>
+            <th>Amount</th>
+            <td>{{ shift.amount }}</td>
+            <th class="col-sm-2 warning">Amount</th>
+            <td class="warning">{{ shift0.amount }}</td>
+        </tr>
+        <tr>
+            <th>Docket ID(s)</th>
+            <td>{{ shift.start_docket_id }} - {{ shift.end_docket_id }}</td>
+            <th class="col-sm-2 warning">Docket ID</th>
+            <td class="warning">{{ shift0.start_docket_id }} - {{ shift0.end_docket_id }}</td>
+        </tr>
+    </table>
+    <!--
+    <button class="button btn-success btn-lg" ng-click="add(100)">
+        <i class="glyphicon glyphicon-ok"></i> Add 100 Baht
+    </button>
+        -->
+    <button class="button btn-success btn-lg" ng-click="restartShift()">
+        <i class="glyphicon glyphicon-ok"></i> Summarise and Open New Shift
+    </button>
+</div>`
+
+<div class="panel panel-default col-lg-7 hidden-print">
+    <!-- Default panel contents -->
     <div class="panel-heading hidden-print"><li class="fa fa-list-ol"></li> ปรับราคาสินค้า</div>
 
     <!-- Table -->
     <table class="table">
         <thead>
-            <tr><th>รายการ</th>
-             <th>ราคาขายต่อหน่วย</th>
+            <tr>
+                <th>รายการ</th>
+                <th>ราคาขายต่อหน่วย</th>
             </tr>
         </thead>
         <tbody>
@@ -19,7 +59,7 @@
         </tbody>
     </table>
     <button class="button btn-success btn-lg" ng-click="save()">
-                <i class="glyphicon glyphicon-ok"></i> บันทึก
+        <i class="glyphicon glyphicon-ok"></i> บันทึก
     </button>
     <button class="button btn-default btn-lg" ng-click="reset()">
         <i class="glyphicon glyphicon-refresh"></i> เริ่มใหม่

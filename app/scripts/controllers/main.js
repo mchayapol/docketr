@@ -59,7 +59,7 @@ angular.module('docketrApp')
 
         return branchlabelFilter;
     })
-.controller('MainCtrl', function ($scope, $window, $resource, $alert, Products, Customers, Dockets) {
+.controller('MainCtrl', function ($scope, $window, $resource, $alert, Products, Customers, Dockets, Shifts) {
     $scope.search = {
         option: 'name'
     };
@@ -199,6 +199,10 @@ angular.module('docketrApp')
             $scope.newId = res.data;
             console.log($scope.newId);
         });
+
+
+        Shifts.add($scope.totalAmount());
+
       };
 
       $scope.clearForm = function () {
