@@ -194,6 +194,8 @@ angular.module('docketrApp')
         window.onbeforeprint = beforePrint;
         window.onafterprint = afterPrint;
         */
+        // Update date/time
+        $scope.date = (new Date()).toLocaleString("en-Gb");
         $window.print();
         $scope.newId = Dockets.getId().then(function (res) {
             $scope.newId = res.data;
