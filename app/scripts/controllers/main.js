@@ -197,10 +197,13 @@ angular.module('docketrApp')
         // Update date/time
         $scope.date = (new Date()).toLocaleString("en-Gb");
         $window.print();
-        $scope.newId = Dockets.getId().then(function (res) {
+		
+        Dockets.getNewId().then(function (res) {
             $scope.newId = res.data;
-            console.log($scope.newId);
-        });
+            console.log($scope.newId,'===',res.data);			
+        },function(res) {
+			console.log('Error:',res);
+		});
 
 
         Shifts.add($scope.totalAmount());
