@@ -3,7 +3,7 @@ use Luracast\Restler\RestException;
 
 $config = [
 	'db' => [
-		'hostname' => '13.76.130.187',
+		'hostname' => '127.0.0.1',
 		'dbname' => 'theone',
 		'username' => 'root',
 		'password' => 'bitnami'
