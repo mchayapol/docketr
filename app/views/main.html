@@ -108,7 +108,8 @@
     </table>
     <button class="button btn-success btn-lg hidden-print" ng-click="saveAndPrint()">
         <i class="glyphicon glyphicon-print"></i> พิมพ์
-    </button> id:{{ newId }}
+    </button>
+	doc_id:{{ newId }}
 </div>
 
 <!-- Printing Prep -->
@@ -127,9 +128,11 @@
         วันที่: {{ date }}
     </p>
     <p>
+	<span style="font-size: 12pt;">
         {{selectedCustomer.name}}<br>
         {{ selectedCustomer.branch | branchlabel}}<br>
         {{selectedCustomer.address}}<br>
+		</span>
         เลขประจำตัวผู้เสียภาษีผู้ซื้อ: {{selectedCustomer.taxNo}}<br />
         ทะเบียนรถ {{selectedCustomer.carPlateNo || '-'}}
     </p>
