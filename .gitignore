@@ -6,6 +6,6 @@
 node_modules/
 bower_components/
 vendor/
-docketr/app/bower_components
+app/bower_components
 docketr/rest/public/docs/
 rest/public/docketid.dat
