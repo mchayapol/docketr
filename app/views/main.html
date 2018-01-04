@@ -125,40 +125,40 @@
     <p>
         สาขาที่ออกใบกำกับภาษี: {{ company.branch | branchlabel }}<br />
         เลขที่: {{ newId }}<br />
-		<span style="font-size: 12pt;">
+		<span style="font-size: 10pt;">
         วันที่: {{ date }}
 		</span>
     </p>
     <p>
-	<span style="font-size: 12pt;">
+	<span style="font-size: 10pt;">
         {{selectedCustomer.name}}<br>
         {{ selectedCustomer.branch | branchlabel}}<br>
         {{selectedCustomer.address}}<br>
-		
-        เลขประจำตัวผู้เสียภาษีผู้ซื้อ: {{selectedCustomer.taxNo}}<br />
-        ทะเบียนรถ {{selectedCustomer.carPlateNo || '-'}}
-		</span>
+	</span>
+        เลขประจำตัวผู้เสียภาษีผู้ซื้อ: <span style="font-size: 12pt;">{{selectedCustomer.taxNo}}</span><br />
+        ทะเบียนรถ <span style="font-size: 12pt;">{{selectedCustomer.carPlateNo || '-'}}</span>
+
     </p>
     <table class="table">
         <thead>
             <tr>
-                <td>รายการ</td>
-                <td align="right">ราคา/หน่วย</td>
+                <td>รายการ (ราคา)</td>
+                <td align="right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                 <td align="right">ปริมาณ</td>
                 <td align="right">จำนวนเงิน</td>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="p in products" ng-hide="!p.amount">
-                <td>{{ p.name }}</td>
-                <td align="right">{{ p.price }}</td>
+                <td colspan="2">{{ p.name }}<br>
+				<span style="text-align:right">({{ p.price }})</span>
+				</td>
+                <!-- <td align="right">{{ p.price }}</td> -->
                 <td align="right">{{ p.amount / p.price | number:3}}</td>
                 <td align="right">{{p.amount | number:2 }}</td>
             </tr>
-            <tr>
-                <td align="right" colspan="3">มูลค่าสินค้า</td>
-                <td align="right">{{ totalAmount()/107*100 |number:2 }}</td>
-            </tr>
+
+			<!--
             <tr>
                 <td align="right" colspan="3" style="border: none;">ภาษีมูลค่าเพิ่ม (VAT 7%)</td>
                 <td align="right" style="border: none;">{{ totalAmount()/107*7 |number:2 }}</td>
@@ -167,8 +167,22 @@
                 <td align="right" colspan="3" style="border: none;">รวม ({{ bahttext(totalAmount(),'บาทถ้วน') }})</td>
                 <td align="right" style="border: none;">{{ totalAmount() |number:2 }}</td>
             </tr>
-
+-->
         </tbody>
+		<tfoot>
+		     <tr>
+                <td align="right" colspan="3">
+				มูลค่าสินค้า<br>
+				ภาษีมูลค่าเพิ่ม (VAT 7%)<br>
+				รวม ({{ bahttext(totalAmount(),'บาทถ้วน') }})
+				</td>
+                <td align="right">
+				{{ totalAmount()/107*100 |number:2 }}<br>
+				{{ totalAmount()/107*7 |number:2 }}<br>
+				{{ totalAmount() |number:2 }}
+				</td>
+            </tr>
+			</tfoot>
     </table>
     ได้รับสินค้าตามรายการนี้ไว้ถูกต้อง<br />
     และในสภาพเรียบร้อยทุกประการ<br />
