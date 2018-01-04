@@ -125,16 +125,19 @@
     <p>
         สาขาที่ออกใบกำกับภาษี: {{ company.branch | branchlabel }}<br />
         เลขที่: {{ newId }}<br />
+		<span style="font-size: 12pt;">
         วันที่: {{ date }}
+		</span>
     </p>
     <p>
 	<span style="font-size: 12pt;">
         {{selectedCustomer.name}}<br>
         {{ selectedCustomer.branch | branchlabel}}<br>
         {{selectedCustomer.address}}<br>
-		</span>
+		
         เลขประจำตัวผู้เสียภาษีผู้ซื้อ: {{selectedCustomer.taxNo}}<br />
         ทะเบียนรถ {{selectedCustomer.carPlateNo || '-'}}
+		</span>
     </p>
     <table class="table">
         <thead>
