@@ -152,6 +152,7 @@ angular.module('docketrApp')
     $scope.bahttext = BAHTTEXT;
 
     $scope.saveAndPrint = function () {
+		$scope.date = (new Date()).toLocaleString("en-Gb");
         if (!$scope.selectedCustomer ||
             !$scope.selectedCustomer.name ||
             !$scope.selectedCustomer.branch ||
