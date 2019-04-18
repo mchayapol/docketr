@@ -8,23 +8,12 @@ class Products {
     }
 
 
-
-
 	// List all products
-	/*
-	* @url GET *
-	* @url GET all*	     
-	*/
     function index()
     {
-		try {
-
-            $products = array();
-            $products = ORM::forTable('docketr_product')->findArray();
-			return $products;
-		} catch(PDOException $e) {
-			throw new RestException(501, 'MySQL: ' . $e->getMessage());
-		}			
+				$products = array();
+				$products = ORM::forTable('docketr_product')->findArray();
+				return $products;
     }
 
     function get($id)
