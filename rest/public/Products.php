@@ -7,7 +7,14 @@ class Products {
     {
     }
 
+
+
+
 	// List all products
+	/*
+	* @url GET *
+	* @url GET all*	     
+	*/
     function index()
     {
 		try {
