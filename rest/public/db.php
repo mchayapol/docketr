@@ -1,4 +1,6 @@
 <?php
+require_once '../vendor/autoload.php';
+
 use Luracast\Restler\RestException;
 
 $config = [
@@ -13,7 +15,7 @@ $config = [
 try {
 
 	$config['db']['dsn'] = 'mysql:host='.$config['db']['hostname'].';dbname='.$config['db']['dbname'];    
-
+	ORM::configure('driver_options', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 	\ORM::configure($config['db']['dsn']);
 	if (!empty($config['db']['username']) && !empty($config['db']['password'])) {
 		\ORM::configure('username', $config['db']['username']);
@@ -21,5 +23,6 @@ try {
 	}
 
 } catch (PDOException $e) {
+	print($e->getMessage());
 	throw new RestException(501, 'MySQL: ' . $e->getMessage());
 }

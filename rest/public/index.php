@@ -2,7 +2,9 @@
 //error_reporting(E_ALL);
 //ini_set('display_errors', 'On');
 
-require_once '../vendor/restler.php';
+require_once '../vendor/autoload.php';
+// require_once '../vendor/restler.php';
+// require_once '../vendor/j4mie/idiorm/idiorm.php';
 require_once 'db.php';
 
 use Luracast\Restler\Restler;

@@ -11,8 +11,8 @@ class Customers {
     function index()
     {
 		try {
-            $customers = array();
-            $customers = ORM::forTable('docketr_customer')->findArray();
+			$customers = array();
+			$customers = ORM::forTable('docketr_customer')->findArray();
 			return $customers;
 		} catch(PDOException $e) {
 			throw new RestException(501, 'MySQL: ' . $e->getMessage());

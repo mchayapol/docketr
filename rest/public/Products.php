@@ -11,6 +11,7 @@ class Products {
     function index()
     {
 		try {
+
             $products = array();
             $products = ORM::forTable('docketr_product')->findArray();
 			return $products;
