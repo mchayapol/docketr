@@ -1,3 +1,5 @@
+.env*
+/cache
 /node_modules
 /dist
 /.tmp
@@ -9,3 +11,6 @@ vendor/
 app/bower_components
 docketr/rest/public/docs/
 rest/public/docketid.dat
+Makefile
+composer.lock
+package-lock.json

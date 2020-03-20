@@ -95,7 +95,7 @@ angular.module('docketrApp')
 
     function BAHTTEXT(num, suffix) {
         num = num.toString().replace(/[, ]/g, ''); // remove commas, spaces
-        if (isNaN(num) || parseFloat(num) == 0) {
+        if (isNaN(num) || parseFloat(num) === 0) {
             return 'ศูนย์บาทถ้วน';
         } else {
             var t = ['', 'สิบ', 'ร้อย', 'พัน', 'หมื่น', 'แสน', 'ล้าน'];
@@ -109,7 +109,7 @@ angular.module('docketrApp')
                 // precision-hack; more accurate than parseFloat the whole number
                 parts[1] = parseFloat('0.' + parts[1]).toFixed(2).toString().split('.')[1];
 
-                var text = parseInt(parts[0]) ? BAHTTEXT(parts[0]) : '';
+                let text = parseInt(parts[0]) ? BAHTTEXT(parts[0]) : '';
 
                 if (parseInt(parts[1]) > 0) {
                     text = text.replace('ถ้วน', '') + BAHTTEXT(parts[1], 'สตางค์');
@@ -126,11 +126,11 @@ angular.module('docketrApp')
 
                 } else {
 
-                    var text = "";
+                    let text = "";
 
                     for (var i = 0; i < num.length; i++) {
                         if (parseInt(num.charAt(i)) > 0) {
-                            if (num.length > 2 && i == num.length - 1 && num.charAt(i) == 1 && suffix != 'สตางค์') {
+                            if (num.length > 2 && i === num.length - 1 && num.charAt(i) === 1 && suffix !== 'สตางค์') {
                                 text += 'เอ็ด' + t[num.length - 1 - i];
                             } else {
                                 text += n[num.charAt(i)] + t[num.length - 1 - i];
@@ -216,11 +216,11 @@ angular.module('docketrApp')
           $scope.products.forEach(function (item, index) {
               item.amount = null;
           });
-      }
+      };
 
       $scope.clearSearch = function () {
           $scope.selectedCustomer = {};
-      }
+      };
 
       $scope.$watch('Products.products', function () {
           Products.refresh().$promise.then(function () {

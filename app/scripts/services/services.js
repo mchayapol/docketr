@@ -7,14 +7,15 @@
  * # services
  * Service in the docketrApp.
  */
+let apiUrl = 'http://localhost';
 angular.module('docketrApp')
     .service('Customers', function ($resource) {
-        var Customers = $resource('http://localhost/docketr_api/customers/:id', {id:'@id'},
+        var Customers = $resource(`${apiUrl}/customers/:id`, {id:'@id'},
           {
               add: { method: "POST" },
               update: {
                   method: "PUT",
-                  url: 'http://localhost/docketr_api/customers/:id',
+                  url: `${apiUrl}/customers/:id`,
                   isArray: false
               }
           }
@@ -72,7 +73,7 @@ angular.module('docketrApp')
         var customers = self.refresh();
     })
   .service('Products', function ($resource) {
-      var Products = $resource('http://localhost/docketr_api/products', {},
+      var Products = $resource(`${apiUrl}/products`, {},
           {
               save: { method: "POST", isArray: true }
           }
@@ -111,29 +112,29 @@ angular.module('docketrApp')
   .service('Dockets', function ($http) {
       var self = this;
       self.getId = function () {
-          return $http.get('http://localhost/docketr_api/dockets');
+          return $http.get(`${apiUrl}/dockets`);
       };
 
       self.getNewId = function () {
 		  console.log('getNewId');
-          return $http.get('http://localhost/docketr_api/dockets/nextId');
+          return $http.get(`${apiUrl}/dockets/nextId`);
       };
   })
   .service('Shifts', function ($http) {
       var self = this;
       self.add = function (amount) {
-          return $http.get('http://localhost/docketr_api/shifts/add?amount='+amount);
+          return $http.get(`${apiUrl}/shifts/add?amount=${amount}`);
       };
 
       self.get = function (id) {
-          return $http.get('http://localhost/docketr_api/shifts/' + id);
+          return $http.get(`${apiUrl}/shifts/${id}`);
       };
 
       self.restart = function () {
-          return $http.get('http://localhost/docketr_api/shifts/new');
+          return $http.get(`${apiUrl}/shifts/new`);
       };
 
       self.current = function () {
-          return $http.get('http://localhost/docketr_api/shifts/last');
+          return $http.get(`${apiUrl}/shifts/last`);
       };
   });
